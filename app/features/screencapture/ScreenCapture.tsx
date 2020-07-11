@@ -1,16 +1,19 @@
 import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styles from './ScreenCapture.css';
+import styles from './screenCapture.css';
 import routes from '../../constants/routes.json';
-// import {
-//   increment,
-//   decrement,
-//   incrementIfOdd,
-//   incrementAsync,
-// } from './screenCapture';
+import {
+  increment,
+  decrement,
+  incrementIfOdd,
+  incrementAsync,
+  selectCount,
+} from './screenGrab';
 
-export default function ScreenCapture(): JSX.Element {
+export default function ScreenCapture() {
+  const dispatch = useDispatch();
+  const value = useSelector(selectCount);
   return (
     <div>
       <div className={styles.backButton} data-tid="backButton">
@@ -18,7 +21,51 @@ export default function ScreenCapture(): JSX.Element {
           <i className="fa fa-arrow-left fa-3x" />
         </Link>
       </div>
-      <div>SCREEN GRAB</div>
+      <div className={`screengrab ${styles.counter}`} data-tid="screengrab">
+        {value}
+      </div>
+      <div className={styles.btnGroup}>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            dispatch(increment());
+          }}
+          data-tclass="btn"
+          type="button"
+        >
+          <i className="fa fa-plus" />
+        </button>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            dispatch(decrement());
+          }}
+          data-tclass="btn"
+          type="button"
+        >
+          <i className="fa fa-minus" />
+        </button>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            dispatch(incrementIfOdd());
+          }}
+          data-tclass="btn"
+          type="button"
+        >
+          odd
+        </button>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            dispatch(incrementAsync());
+          }}
+          data-tclass="btn"
+          type="button"
+        >
+          async
+        </button>
+      </div>
     </div>
   );
 }
