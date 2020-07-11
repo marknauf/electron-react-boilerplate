@@ -12,3 +12,9 @@
 .container a {
   font-size: 1.4rem;
 }
+
+.draggable {
+  color: white;
+  -webkit-app-region: drag;
+  cursor: grab;
+}
